@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/centos-7"
+  config.vm.box = "centos/7"
 
   config.vm.define "bolmos-oS" do |server|
     server.vm.hostname = "bolmos-oS"
@@ -15,7 +15,6 @@ Vagrant.configure("2") do |config|
     server.vm.provision "shell", inline: <<-SHELL
       curl -sfL https://get.k3s.io | sh -      
     SHELL
-end
   end
 
   config.vm.define "bolmos-oSW" do |serverWorker|
@@ -26,8 +25,8 @@ end
       vb.memory = 512
       vb.cpus = 1  
     end
-    server.vm.provision "shell", inline: <<-SHELL
+    serverWorker.vm.provision "shell", inline: <<-SHELL
       curl -sfL https://get.k3s.io | K3S_URL=https://192.168.42.110 sh -      
     SHELL
   end
-
+end

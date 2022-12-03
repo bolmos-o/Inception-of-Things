@@ -88,4 +88,37 @@ serverWorker.vm.provision "shell", inline: <<-SHELL
 	rm /shared/node-token
 SHELL
 ```
+
+#### Usage
+Then you can launch your Vagrant file using:
+
+```console
+vagrant up
+```
+
+and check runned VM's:
+```console
+vagrant status
+```
+
+> Current machine states:
+
+> bolmos-oS                 running (libvirt)
+
+> bolmos-oSW                running (libvirt)
+
+> This environment represents multiple VMs. The VMs are all listed
+> above with their current state. For more information about a specific
+> VM, run `vagrant status NAME`.
+
+To connect to VM use:
+```console
+vagrant ssh $vm_name
+```
+like:
+```console
+vagrant bolmos-oS
+vagrant bolmos-oSW
+```
+
 # NEED TO FINISH "You will have to use kubectl (and therefore install it too)." and test file in school pc. don't work correctly on MY PC

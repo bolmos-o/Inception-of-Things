@@ -117,8 +117,8 @@ vagrant ssh $vm_name
 ```
 like:
 ```console
-vagrant bolmos-oS
-vagrant bolmos-oSW
+vagrant ssh bolmos-oS
+vagrant ssh bolmos-oSW
 ```
 
 # NEED TO FINISH "You will have to use kubectl (and therefore install it too)." and test file in school pc. don't work correctly on MY PC

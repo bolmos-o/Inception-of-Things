@@ -1,0 +1,41 @@
+#Service: This directs the traffic to a pod.
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-three
+spec:
+  selector:
+    app: app-three
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+#A Kubernetes Deployment tells Kubernetes how to create or modify instances of the pods that hold a containerized application.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-three
+  labels:
+    app: app-three
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-three
+  template:
+    metadata:
+      labels:
+        app: app-three
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: paulbouwer/hello-kubernetes:1.9
+        ports:
+          - containerPort: 8080
+        env:
+          - name: MESSAGE
+            value: "Hello from app3."
+
+

@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 	# docker
 	curl -fsSL https://get.docker.com -o get-docker.sh
 	sh get-docker.sh
-	usermod -aG docker $USER
+	usermod -aG docker vagrant
 	# kubectl
 	curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 	install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl

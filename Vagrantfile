@@ -34,5 +34,8 @@ EOF
 	wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 	# helm
 	curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+	# update /etc/hosts
+	echo '127.0.0.1 gitlab.example.com' >> /etc/hosts
 	SHELL
+
 end

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create cluster
-k3d cluster create iot --k3s-arg="--disable=traefik@server:0" -p 443:443@loadbalancer #-p 8888:8888@loadbalancer 
+k3d cluster create iot --host-alias 172.20.0.2:gitlab.example.com --k3s-arg="--disable=traefik@server:0" -p 443:443@loadbalancer #-p 8888:8888@loadbalancer 
 kubectl create namespace argocd
 kubectl create namespace dev
 
@@ -27,7 +27,7 @@ rm argocd-linux-amd64
 echo "Waiting for argocd server"
 # port-foward argocd
 kubectl get all -n argocd
-kubectl wait --for=condition=Ready pod/$(kubectl get pods -n argocd | grep argocd-server | awk '{print $1}') --timeout=60s -n argocd
+kubectl wait --for=condition=Ready pod/$(kubectl get pods -n argocd | grep argocd-server | awk '{print $1}') --timeout=300s -n argocd
 kubectl port-forward svc/argocd-server -n argocd 8080:443 >> ~/argocd-log.txt 2>&1 &
 
 echo "Logging and setting argocd password."
@@ -44,7 +44,10 @@ kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.d
 
 # # deploy app
 kubectl config set-context --current --namespace=argocd
-argocd app create app --repo gitlab.iot --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
+argocd app create app --repo https://gitlab.example.com/root/bolmos-o.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
 # argocd app sync app
 
 # argocd app set app --sync-policy automated
+
+#argocd app create app --repo https://gitlab.example.com/root/bolmos-o.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
+argocd app create app --repo https://gitlab.example.com/root/Inception-of-Things.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev

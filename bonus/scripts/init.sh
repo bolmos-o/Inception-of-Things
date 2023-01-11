@@ -48,6 +48,3 @@ argocd app create app --repo https://gitlab.example.com/root/bolmos-o.git --path
 # argocd app sync app
 
 # argocd app set app --sync-policy automated
-
-#argocd app create app --repo https://gitlab.example.com/root/bolmos-o.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
-argocd app create app --repo https://gitlab.example.com/root/Inception-of-Things.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev

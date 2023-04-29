@@ -18,6 +18,7 @@ helm upgrade --install gitlab gitlab/gitlab \
   --set global.ingress.provider=traefik \
   --set certmanager-issuer.email=me@example.com \
   --set postgresql.image.tag=13.6.0 \
+  --set gitlab-runner.install=false \
   --set global.edition=ce
 
 # deploy argocd
@@ -49,7 +50,7 @@ kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.d
 kubectl config set-context --current --namespace=argocd
 
 # need to change to a service address...
-argocd app create app --repo https://gitlab.localhost/root/bolmos-o.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
+argocd app create app --repo http://gitlab.localhost/root/bolmos-o.git --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
 # argocd app sync app
 
 # argocd app set app --sync-policy automated

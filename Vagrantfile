@@ -35,7 +35,7 @@ EOF
 	# helm
 	curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 	# update /etc/hosts
-	echo '127.0.0.1 gitlab.example.com' >> /etc/hosts
+	echo '127.0.0.1 gitlab.localhost' >> /etc/hosts
 	SHELL
 
 end

@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
-    vb.memory = "8192"
+    vb.memory = "10984"
 	vb.cpus = 12
 	vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
 	vb.customize ["modifyvm", :id, "--vram", "64"]
@@ -34,6 +34,9 @@ EOF
 	wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 	# helm
 	curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+	#argocd cli
+	curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+	sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 	# update /etc/hosts
 	echo '127.0.0.1 gitlab.localhost' >> /etc/hosts
 	SHELL

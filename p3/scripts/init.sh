@@ -18,6 +18,5 @@ argocd account update-password --current-password $(kubectl -n argocd get secret
 # deploy app
 kubectl config set-context --current --namespace=argocd
 argocd app create app --repo https://github.com/bolmos-o/bolmos-o --path iot --dest-server https://kubernetes.default.svc --dest-namespace dev
-argocd app sync app
-
 argocd app set app --sync-policy automated
+argocd app sync app

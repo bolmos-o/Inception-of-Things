@@ -2,6 +2,13 @@
 
 # create cluster
 k3d cluster create iot --network "host"
+
+# Install Traefik Resource Definitions:
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v2.10/docs/content/reference/dynamic-configuration/kubernetes-crd-definition-v1.yml
+
+# Install RBAC for Traefik:
+kubectl apply -f https://raw.githubusercontent.com/traefik/traefik/v2.10/docs/content/reference/dynamic-configuration/kubernetes-crd-rbac.yml
+
 kubectl create namespace dev
 
 helm repo add gitlab https://charts.gitlab.io/

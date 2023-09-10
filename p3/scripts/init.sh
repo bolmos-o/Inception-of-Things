@@ -11,9 +11,9 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 
 # login. new password: inception
 echo "Waiting for argocd..."
-kubectl wait --for=condition=Ready pod/$(kubectl get pods -n argocd | grep argocd-server | awk '{print $1}') --timeout=300s -n argocd
+kubectl wait --for=condition=Available deployment/argocd-server -n argocd --timeout=300s
 argocd login localhost:8080 --insecure --username admin --password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
-argocd account update-password --current-password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo) --new-password inception
+argocd account update-password --account admin --current-password $(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo) --new-password inception
 
 # deploy app
 kubectl config set-context --current --namespace=argocd
